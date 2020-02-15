@@ -66,14 +66,22 @@ public final class Constants {
   }
 
   public static final class ShooterConstants {
-    public static final int kTopMotorPort = 2;
-    public static final int kBottomMotorPort = 1;
+    public static final int kTopMotorPort = 10;
+    public static final int kBottomMotorPort = 11;
 
     public static double kP = .0001;
     public static double kI = 0.0;
     public static double kD = 0.0;
     public static double kFF = 1.0 / 5874.0;
 
+  }
+
+  public static final class IndexerConstants{
+    public static final int kUpperConveyorMotorPort = 8;
+    public static final int kLowerConveyorMotorPort = 9;
+
+    public static final double kUpperConveyorSpeedDefault = 1;
+    public static final double kLowerConveyorSpeedDefault = 0.4;
   }
 
 

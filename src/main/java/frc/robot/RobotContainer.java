@@ -24,9 +24,12 @@ import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConst
 import frc.robot.commands.AimByLimelight;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.StartShooter;
+import frc.robot.commands.MoveUpperConveyor;
+import frc.robot.commands.MoveLowerConveyor;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -34,6 +37,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ElevatorConstants;
+import frc.robot.Constants.IndexerConstants;
 import frc.robot.Constants.OIConstants;
 
 /**
@@ -47,6 +51,7 @@ public class RobotContainer {
     private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
     private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
     private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+    private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
 
     // The driver's controller
     XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -74,9 +79,17 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
 
-        new JoystickButton(m_driverController, 2).whileActiveOnce(new StartShooter(m_shooterSubsystem), true);
+        //new JoystickButton(m_driverController, 2).whileActiveOnce(new StartShooter(m_shooterSubsystem), true);
         new JoystickButton(m_driverController, 6).whileActiveContinuous(new AimByLimelight(m_driveSubsystem), true);
-        
+
+        new JoystickButton(m_driverController, 4).toggleWhenActive(
+            new MoveUpperConveyor(m_indexerSubsystem, IndexerConstants.kUpperConveyorSpeedDefault));
+        // new JoystickButton(m_driverController, 4).toggleWhenActive(
+        //     new MoveLowerConveyor(m_indexerSubsystem, IndexerConstants.kLowerConveyorSpeedDefault));
+        // new JoystickButton(m_driverController, 1).toggleWhenActive(
+        //     new MoveUpperConveyor(m_indexerSubsystem, IndexerConstants.kUpperConveyorSpeedDefault));
+        // new JoystickButton(m_driverController, 2).toggleWhenActive(
+        //     new MoveLowerConveyor(m_indexerSubsystem, IndexerConstants.kUpperConveyorSpeedDefault));
     }
 
 
